@@ -5,6 +5,11 @@ using CommandTerminal;
 
 namespace DVPathTracer
 {
+    /**
+     * This class adapts code created by Miles "Zeibach" Spielberg
+     * Copyright 2020 Miles Spielberg. Licensed under MIT License*
+     * https://github.com/mspielberg/dv-steamcutoff
+     */
     public static class Commands
     {
         [HarmonyPatch(typeof(Terminal), "Start")]

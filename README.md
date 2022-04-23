@@ -6,7 +6,8 @@ It periodically reports information about the path a player has taken through Th
 Download: TBC  
 Install using Unity Mod Manager
 
-**
+*This mod uses code for registering custom in-game terminal commands created by Miles "Zeibach" Spielberg*  
+*Copyright 2020 Miles Spielberg. Licensed under MIT License*
 
 ## What information does it report?
 
