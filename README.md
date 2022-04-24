@@ -3,8 +3,8 @@
 This is a mod for the video game Derail Valley created by Altfuture.
 It periodically reports information about the path a player has taken through The Valley to a file in its directory.
 
-Download: TBC  
-Install using Unity Mod Manager
+Download: [Nexus Mods](https://www.nexusmods.com/derailvalley/mods/425)  
+Install using [Unity Mod Manager](https://www.nexusmods.com/site/mods/21)
 
 *This mod uses code for registering custom in-game terminal commands (i.e. **Commands.cs**) created by Miles "Zeibach" Spielberg.*  
 *Copyright 2020 Miles Spielberg. Licensed under MIT License.* [Source](https://github.com/mspielberg/dv-steamcutoff/blob/master/Commands.cs)
