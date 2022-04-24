@@ -42,14 +42,14 @@ Timelapse your journey through The Valley!
 
 - To begin tracing the player:
   1. Open the Mod Manager Window with **ctrl-F10**
-  3. Check the box 'Active' in this mod's settings
+  2. Check the box 'Active' in this mod's settings
 - While active the tracer will periodically write the player's current location to **DVTracedPath.csv** in the folder this mod was installed to  
   *(i.e. /Derail Valley/Mods/DVPathTracer/DVTracedPath.csv)*
   - If the file exists from a previous time the tracer was active then the file will be overwritten
   - See configuration options in the **Advanced Usage** section
 - To stop tracing the player:
   1. Open the Mod Manager Window with **ctrl-F10**
-  3. Uncheck the box 'Active' in this mod's settings
+  2. Uncheck the box 'Active' in this mod's settings
 
 ## Advanced Usage
 
