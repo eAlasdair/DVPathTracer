@@ -2,7 +2,7 @@
   "Id": "DVPathTracer",
   "DisplayName": "DV Path Tracer",
   "Author": "Alasdair Smith",
-  "Version": "0.1.0",
+  "Version": "0.2.0",
   "AssemblyName": "DVPathTracer.dll",
   "EntryMethod": "DVPathTracer.Main.Load"
 }

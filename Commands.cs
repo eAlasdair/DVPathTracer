@@ -8,7 +8,7 @@ namespace DVPathTracer
     /**
      * This class adapts code created by Miles "Zeibach" Spielberg
      * Copyright 2020 Miles Spielberg. Licensed under MIT License
-     * Primary source: https://github.com/mspielberg/dv-steamcutoff
+     * Primary source: https://github.com/mspielberg/dv-steamcutoff/blob/master/Commands.cs
      */
     public static class Commands
     {
@@ -36,16 +36,17 @@ namespace DVPathTracer
         public static void Register()
         {
             Register("reportHere", _ => {
-                Terminal.Log(LocationReporter.GetReportOnPlayer(Time.time));
+                StockFinder.UpdateTrackedStock();
+                Terminal.Log(BaseReporter.GetReport(Time.time));
             });
 
             Register("playerLocation", _ => {
-                Vector3 pos = LocationReporter.GetPlayerPosition();
-                Terminal.Log($"x = {pos.x}\ny = {pos.y}\nz = {pos.z}");
+                Vector3 pos = BaseReporter.player.Position;
+                Terminal.Log($"x = {pos.x}\ny = {pos.y - BaseReporter.seaLevel}\nz = {pos.z}");
             });
 
             Register("playerRotation", _ => {
-                Terminal.Log(LocationReporter.GetPlayerRotation().ToString());
+                Terminal.Log(BaseReporter.player.Rotation.ToString());
             });
 
             Register("whatFile", _ => {
@@ -53,7 +54,7 @@ namespace DVPathTracer
             });
 
             Register("setFileTo", args => {
-                if (!LocationReporter.isActive)
+                if (!BaseReporter.isActive)
                 {
                     if (args.Length > 0)
                     {
@@ -72,7 +73,7 @@ namespace DVPathTracer
                 }
                 else
                 {
-                    Terminal.Log($"ERROR: Tracer is still running!");
+                    Terminal.Log($"ERROR: Cannot change file while the tracer is active!");
                 }
             });
 
@@ -101,9 +102,9 @@ namespace DVPathTracer
             });
 
             Register("isActive", _ => {
-                if (LocationReporter.isActive)
+                if (BaseReporter.isActive)
                 {
-                    Terminal.Log($"Tracer is active, writing to file: {LocationReporter.fileName}");
+                    Terminal.Log($"Tracer is active, writing to file: {BaseReporter.fileName}");
                 }
                 else
                 {
@@ -112,22 +113,22 @@ namespace DVPathTracer
             });
 
             Register("activate", _ => {
-                if (!LocationReporter.isActive)
+                if (!BaseReporter.isActive)
                 {
-                    LocationReporter.Activate();
-                    Terminal.Log($"Tracing begun to file: {LocationReporter.fileName}");
+                    BaseReporter.Activate();
+                    Terminal.Log($"Tracing begun to file: {BaseReporter.fileName}");
                 }
                 else
                 {
-                    Terminal.Log($"ERROR: Tracer already active! Writing to file: {LocationReporter.fileName}");
+                    Terminal.Log($"ERROR: Tracer already active! Writing to file: {BaseReporter.fileName}");
                 }
             });
 
             Register("deactivate", _ => {
-                if (LocationReporter.isActive)
+                if (BaseReporter.isActive)
                 {
-                    LocationReporter.Deactivate();
-                    Terminal.Log($"Tracing ended using file: {LocationReporter.fileName}");
+                    BaseReporter.Deactivate();
+                    Terminal.Log($"Tracing ended using file: {BaseReporter.fileName}");
                 }
                 else
                 {
@@ -137,8 +138,7 @@ namespace DVPathTracer
 
             Register("disablePreventActivationOnStartup", _ => {
                 Main.settings.forceStartInactive = false;
-                Terminal.Log("Tracer will remember if it was active when you end the game and will, if active on startup, overwrite any existing file.\n" +
-                    "Be wary of side-effects in .csv output while the game is loading.");
+                Terminal.Log("Tracer will remember if it was active when you end the game and will, if active on startup, overwrite any existing file.");
             });
 
             Register("enablePreventActivationOnStartup", _ => {

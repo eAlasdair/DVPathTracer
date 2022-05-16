@@ -1,3 +1,4 @@
 bin/
 obj/
-*.xcf
+assets/*.xcf
+pathAnimator/*.csv

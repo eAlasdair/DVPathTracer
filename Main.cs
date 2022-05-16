@@ -21,6 +21,12 @@ namespace DVPathTracer
             try
             {
                 settings = Settings.Load<Settings>(modEntry);
+                if (settings.version != modEntry.Info.Version)
+                {
+                    modEntry.Logger.Log("Settings is out of date. Creating new");
+                    settings = new Settings();
+                    settings.version = modEntry.Info.Version;
+                }
                 if (settings.forceStartInactive)
                 {
                     settings.isActive = false;
@@ -43,8 +49,6 @@ namespace DVPathTracer
             modEntry.OnToggle = OnToggle;
             modEntry.OnUnload = OnUnload;
             modEntry.OnUpdate = OnUpdate;
-
-            LocationReporter.SetSettings(settings);
 
             return true;
         }
@@ -76,24 +80,24 @@ namespace DVPathTracer
         {
             if (settings.isActive)
             {
-                if (!LocationReporter.isActive)
+                if (!BaseReporter.isActive && BaseReporter.isReady)
                 {
-                    LocationReporter.Activate();
+                    BaseReporter.Activate();
                 }
             }
             else
             {
-                if (LocationReporter.isActive)
+                if (BaseReporter.isActive)
                 {
-                    LocationReporter.Deactivate();
+                    BaseReporter.Deactivate();
                 }
             }
 
-            LocationReporter.TimedReportOnPlayer();
+            BaseReporter.TimedReport();
         }
 
         /**
-         * Patch the PlayerManager to let LocationReporter know when its ready
+         * Patch the PlayerManager to let LocationReporter know when it's ready
          * There's probably a better way to do this... entire mod
          */
         [HarmonyPatch(typeof(PlayerManager), "SetPlayer")]
@@ -101,7 +105,7 @@ namespace DVPathTracer
         {
             static void Postfix()
             {
-                LocationReporter.ManagerIsSet();
+                BaseReporter.ManagerIsSet();
             }
         }
 
