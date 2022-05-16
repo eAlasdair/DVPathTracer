@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+}
+
+#pathAnimator {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+#animationBox {
+    background-color: beige;
+    height: 100%;
+}
+
+#animationPlot {
+    height: 100%;
+}
+
+#settingsBox {
+    background-color:wheat;
+}

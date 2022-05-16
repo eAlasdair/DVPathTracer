@@ -62,7 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LocationReporter.cs" />
+    <Compile Include="BaseReporter.cs" />
+    <Compile Include="PlayerReporter.cs" />
+    <Compile Include="StockFinder.cs" />
+    <Compile Include="StockReporter.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
