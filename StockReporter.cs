@@ -71,7 +71,7 @@ namespace DVPathTracer
         }
 
         /**
-         * TODO: Hopefully the value on the speed gauge, may need conversions
+         * In-game speed - metres per second
          */
         public float Speed
         {

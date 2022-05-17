@@ -20,7 +20,7 @@ namespace DVPathTracer
         public static void Add(TrainCar car)
         {
             int i = 0;
-            while (trackedStock.ContainsKey(i) && trackedStock[i] != null) // TODO add setting for non-space-efficient csvs
+            while (trackedStock.ContainsKey(i) && trackedStock[i] != null)
             {
                 i++;
             }
