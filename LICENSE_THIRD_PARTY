@@ -1,0 +1,50 @@
+This mod uses third-party libraries and other resources that may
+be distributed under licences different from the DV Path Tracer licence.
+
+A summary of all third-party resources are listed below.
+
+In the event that I accidentally failed to list a third-party resource here,
+please bring it to my attention through the issue tracker:
+https://github.com/eAlasdair/DVPathTracer/issues/new
+
+==============================================================================
+Bootstrap
+------------------------------------------------------------------------------
+https://getbootstrap.com/
+Copyright (c) 2011-2022 Twitter, Inc.
+Copyright (c) 2011-2022 The Bootstrap Authors.
+Licensed under MIT.
+==============================================================================
+
+==============================================================================
+Bootstrap Icons
+------------------------------------------------------------------------------
+https://icons.getbootstrap.com/
+Copyright (c) 2019-2021 The Bootstrap Authors.
+Licensed under MIT.
+==============================================================================
+
+==============================================================================
+Commands.cs
+------------------------------------------------------------------------------
+This mod uses code for registering in-game terminal commands (i.e. **Commands.cs**) that expands upon code created by Miles "Zeibach" Spielberg.
+https://github.com/mspielberg/dv-steamcutoff/blob/master/Commands.cs
+Copyright 2020 Miles Spielberg.
+Licensed under MIT.
+==============================================================================
+
+==============================================================================
+JQuery
+------------------------------------------------------------------------------
+https://jquery.com/
+Copyright OpenJS Foundation and other contributors.
+Licensed under MIT.
+==============================================================================
+
+==============================================================================
+Plotly.js
+------------------------------------------------------------------------------
+https://plotly.com/javascript/
+Copyright (c) 2021 Plotly, Inc.
+Licensed under MIT.
+==============================================================================
