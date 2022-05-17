@@ -35,7 +35,7 @@ const _colours = {
     'DE2':     '#ff7f0e',
     'DE6':     '#8c564b',
     'SH282':   '#111111',
-    'Other':   '#2ca02c'
+    'Mod':     '#2ca02c'
 };
 
 $(document).ready(function() {
@@ -62,6 +62,16 @@ $(document).ready(function() {
             loadFile(this.files[0]);
         }
     });
+
+    // Build the Key/Legend
+    for (let i in Object.keys(_colours)) {
+        let item = Object.keys(_colours)[i];
+        let element =   '<div class="row py-1">' +
+                            `<div class="col-2 legendSpot" style="background-color:${_colours[item]}"></div>` +
+                            `<div class="col-10">${item}</div>` +
+                        '</div>';
+        $('#legend').append(element);
+    }
 
     $('#plotButton').click(plotData);
     $('#timelapseButton').click(animateData);
@@ -200,11 +210,11 @@ function getPlottableTraces() {
             mode: 'lines+markers',
             line: {
                 width: 3,
-                color: _colours[carType]
+                color: _colours[carType] ? _colours[carType] : _colours['Mod']
             },
             marker: {
                 size: 3,
-                color: _colours[carType]
+                color: _colours[carType] ? _colours[carType] : _colours['Mod']
             }
         });
         for (let i=0; i < orderedCarKeys.length; i++) {
@@ -275,7 +285,7 @@ function getPlottableFrames() {
                 dataPlot.x.push(car[recordTime][0]); // X
                 dataPlot.y.push(car[recordTime][2]); // Z
                 let carType = carID.split(_idSep)[1];
-                dataPlot.color.push(_colours[carType] ? _colours[carType] : _colours['Other']);
+                dataPlot.color.push(_colours[carType] ? _colours[carType] : _colours['Mod']);
             }
         }
         dataFrames.push(dataPlot);
