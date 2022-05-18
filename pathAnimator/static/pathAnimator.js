@@ -3,7 +3,7 @@ var _playerData = {}; // Time: [X, Y, Z, ROT]
 var _carData = {};    // CID_TYP: {Time: [X, Y, Z, ROT, SPD]}
 const _idSep = '_';   //    ^ This symbol here
 
-const _worldDimentions = [16400, 16400];
+const _worldDimentions = [16360, 16360];
 
 var _traces = [];
 var _frames = [];
@@ -190,7 +190,8 @@ function getPlottableTraces() {
         type: 'scatter',
         mode: 'lines',
         line: {
-          color: _colours['Player']
+            width: 3,
+            color: _colours['Player']
         }
     });
     for (let i=0; i < orderedPlayerKeys.length; i++) {
