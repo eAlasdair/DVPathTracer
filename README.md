@@ -1,5 +1,8 @@
 ﻿# Derail Valley Path Tracer
 
+**Note:** Preparing for 0.2.0 release, the information here does not match the current released version of this mod.
+After 0.2.0 I will move to a proper Main/Develop repo structure.
+
 This is a mod for the video game Derail Valley created by Altfuture.  
 It periodically reports information about the player's journey through The Valley to a file in its directory.
 
