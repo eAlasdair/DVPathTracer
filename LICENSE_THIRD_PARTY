@@ -27,7 +27,7 @@ Licensed under MIT.
 ==============================================================================
 Commands.cs
 ------------------------------------------------------------------------------
-This mod uses code for registering in-game terminal commands (i.e. **Commands.cs**) created by Miles "Zeibach" Spielberg.
+This mod uses code for registering in-game terminal commands (i.e. Commands.cs) created by Miles "Zeibach" Spielberg.
 https://github.com/mspielberg/dv-steamcutoff/blob/master/Commands.cs
 Copyright 2020 Miles Spielberg.
 Licensed under MIT.
