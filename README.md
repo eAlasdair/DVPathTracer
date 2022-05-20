@@ -1,8 +1,5 @@
 ﻿# Derail Valley Path Tracer
 
-**Note:** Preparing for 0.2.0 release, the information here does not match the current released version of this mod.
-After 0.2.0 I will move to a proper main/develop repo structure.
-
 This is a mod for the video game Derail Valley created by Altfuture.  
 It periodically reports information about the player's journey through The Valley to a file in its directory.
 
@@ -13,7 +10,7 @@ Install using [Unity Mod Manager](https://www.nexusmods.com/site/mods/21)
 
 Map the routes you took, or timelapse your journey through The Valley, with the included animation tool!
 
-![Timelapsed path between OWN and GF](./assets/loopy.gif)
+![Route map for a trip from HB to MF and back to SM](./assets/routeMap_HB_MF_SM.png)
 
 **But** if you want to have a go yourself there's plenty of information to look at that the included tool doesn't touch.  
 Import the file into Google Sheets or equivalent and go ham!
@@ -36,6 +33,8 @@ Import the file into Google Sheets or equivalent and go ham!
 - Open the file **PathAnimator.html** with your browser (Chrome etc).
 - Import your traced path manually or by dragging & dropping.
 - For a background image, import the included world map (**worldMap.png**) using the same method.
+
+![Timelapsed path between OWN and GF](./assets/loopy.gif)
 
 ## What information does it report?
 

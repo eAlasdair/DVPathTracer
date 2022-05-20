@@ -1,5 +1,4 @@
 bin/
 obj/
 assets/*.xcf
-pathAnimator/*.csv
-pathAnimator/*.png
+testFiles/
