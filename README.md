@@ -10,7 +10,7 @@ Install using [Unity Mod Manager](https://www.nexusmods.com/site/mods/21)
 
 Map the routes you took, or timelapse your journey through The Valley, with the included animation tool!
 
-![Route map for a trip from HB to MF and back to SM](./assets/routeMap_HB_MF_SM.png)
+![Route map for a trip from HB to MF and back to SM](./assets/routeMap_HB_MF_SM.PNG)
 
 **But** if you want to have a go yourself there's plenty of information to look at that the included tool doesn't touch.  
 Import the file into Google Sheets or equivalent and go ham!
