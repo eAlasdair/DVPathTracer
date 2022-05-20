@@ -27,10 +27,10 @@ Import the file into Google Sheets or equivalent and go ham!
 
 ### Path Animator
 
-- The included path timelapsing tool can be found in the folder **PathAnimator** in the folder this mod was installed to.  
-  *(i.e. /Derail Valley/Mods/DVPathTracer/PathAnimator/)*
+- The included path timelapsing tool can be found in the folder **pathAnimator** in the folder this mod was installed to.  
+  *(i.e. /Derail Valley/Mods/DVPathTracer/pathAnimator/)*
   - For simplicity it is a static webpage hosted on your computer.
-- Open the file **PathAnimator.html** with your browser (Chrome etc).
+- Open the file **pathAnimator.html** with your browser (Chrome etc).
 - Import your traced path manually or by dragging & dropping.
 - For a background image, import the included world map (**worldMap.png**) using the same method.
 
