@@ -39,7 +39,7 @@ namespace DVPathTracer
                 settings.version = modEntry.Info.Version;
             }
 
-            var harmony = new Harmony(modEntry.Info.Id);
+            HarmonyLib.Harmony harmony = new HarmonyLib.Harmony(modEntry.Info.Id);
             harmony.PatchAll();
 
             modEntry.OnGUI = settings.Draw;
@@ -68,7 +68,7 @@ namespace DVPathTracer
          */
         private static bool OnUnload(UnityModManager.ModEntry modEntry)
         {
-            var harmony = new Harmony(modEntry.Info.Id);
+            HarmonyLib.Harmony harmony = new HarmonyLib.Harmony(modEntry.Info.Id);
             harmony.UnpatchAll(modEntry.Info.Id);
             return true;
         }

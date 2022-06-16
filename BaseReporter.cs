@@ -8,7 +8,7 @@ namespace DVPathTracer
     public static class BaseReporter
     {
         public static string fileName = "DVTracedPath.csv";
-        private const string basePath = "./Mods/DVPathTracer/";
+        private const string basePath = "./Mods/DVPathTracer/Sessions/";
 
         public const float seaLevel = 110;
 
@@ -65,13 +65,36 @@ namespace DVPathTracer
          */
         private static void PrepareFile()
         {
+            String DateTimeMaker()
+            {
+                DateTime nowTime = DateTime.Now;
+                //time string format: Date=MM-DD-YYYY Time=HH'MM
+                return $"Date={nowTime.Month.ToString("00")}-{nowTime.Day.ToString("00")}-{nowTime.Year.ToString("0000")} Time={nowTime.Hour.ToString("00")}'{nowTime.Minute.ToString("00")}";
+            }
+
             fileName = Main.settings.fileName;
+            if (Main.settings.betaMode)
+            {
+                fileName += DateTimeMaker();
+            }
             if (!fileName.EndsWith(".csv"))
             {
                 fileName += ".csv";
             }
-            File.WriteAllText(basePath + fileName, $"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
-            Main.Log($"File {fileName} readied");
+            try
+            {
+                if (!Directory.Exists(basePath))
+                {
+                    Directory.CreateDirectory(basePath);
+                }
+                File.WriteAllText(basePath + fileName, $"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
+                Main.Log($"File {fileName} readied");
+            }
+            catch (Exception e) when (e is IOException | e is DirectoryNotFoundException)
+            {
+                Main.Log($"Writing to {basePath + fileName} failed, reason {e.Message}");
+            }
+
         }
 
         /**
