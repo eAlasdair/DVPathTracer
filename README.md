@@ -21,9 +21,9 @@ Import the file into Google Sheets or equivalent and go ham!
 
 - As of version 0.2.0 the tracer is always active by default.
   - This can be changed in the mod settings.
-- While active, the tracer will periodically write information to **DVTracedPath.csv** in the folder this mod was installed to.  
-  *(i.e. /Derail Valley/Mods/DVPathTracer/DVTracedPath.csv)*
-  - If the file exists from a previous time the tracer was active then the file will be overwritten
+- While active, the tracer will periodically write information to a csv file in the **sessions** folder of the folder this mod was installed to.  
+  *(i.e. /Derail Valley/Mods/DVPathTracer/sessions/\<dateandtime\>.csv)*
+  - By default a new file is created every session; if this is disabled in the mod settings each new session will overwrite the file **DVTracedPath.csv**.
 
 ### Path Animator
 
@@ -40,7 +40,7 @@ Import the file into Google Sheets or equivalent and go ham!
 
 The tracer reports to a .csv file with the following information:
 
-### Player information
+### Player information:
 
 The first 5 columns indicate information about you, the player:
 
@@ -64,6 +64,7 @@ The following columns indicate information about all spawned locomotives and the
 - `CRotA` [&deg;] Current rotation about the vertical axis, in degrees from North (like a compass).
 - `CSpd` [Default: kph] Current reported speed.
   - Imperial units can be enabled in the mod settings.
+  - If the [MPH](https://www.nexusmods.com/derailvalley/mods/401) mod is also detected, imperial units will be enabled by default.
 
 Order is preserved to an extent - information about each object will occupy the same column it started in until that object despawns.
 After the object despawns, until a new object takes its place, the tracer will fill that space with the column headings listed above.

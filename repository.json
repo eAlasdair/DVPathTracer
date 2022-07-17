@@ -1,0 +1,19 @@
+﻿{
+  "Releases": [
+    {
+      "Id": "DVPathTracer",
+      "Version": "0.1.0",
+      "DownloadUrl": "https://github.com/eAlasdair/DVPathTracer/releases/download/v0.1.0/DVPathTracer.zip"
+    },
+    {
+      "Id": "DVPathTracer",
+      "Version": "0.2.0",
+      "DownloadUrl": "https://github.com/eAlasdair/DVPathTracer/releases/download/v0.2.0/DVPathTracer-0-2-0.zip"
+    },
+    {
+      "Id": "DVPathTracer",
+      "Version": "0.3.0",
+      "DownloadUrl": ""
+    },
+  ]
+}

@@ -74,6 +74,7 @@
   <ItemGroup>
     <None Include="info.json" />
     <None Include="README.md" />
+    <None Include="repository.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="readmeAssets\" />
