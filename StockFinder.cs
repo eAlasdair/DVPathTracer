@@ -14,6 +14,8 @@ namespace DVPathTracer
             }
         }
 
+        public static int numStock = 0;
+
         /**
          * Inserts the given TrainCar into the earliest available space
          */
@@ -25,6 +27,7 @@ namespace DVPathTracer
                 i++;
             }
             trackedStock[i] = new StockReporter(car);
+            numStock++;
         }
 
         /**
@@ -52,6 +55,7 @@ namespace DVPathTracer
                 if (trackedStock[index] == car)
                 {
                     Remove(index);
+                    numStock--;
                     return;
                 }
             }
@@ -63,6 +67,7 @@ namespace DVPathTracer
                 if (trackedStock[index].Target == car)
                 {
                     Remove(index);
+                    numStock--;
                     return;
                 }
             }
@@ -70,6 +75,7 @@ namespace DVPathTracer
         public static void Remove(int carIndex)
         {
             trackedStock[carIndex] = null;
+            numStock--;
         }
 
         /**

@@ -114,9 +114,8 @@ namespace DVPathTracer
             if (Main.settings.mph)
             {
                 return speed * (float) 2.23694;
-            } else {
-                return speed * (float) 3.6;
             }
+            return speed * (float) 3.6;
         }
     }
 }

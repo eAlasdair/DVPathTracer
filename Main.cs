@@ -39,6 +39,23 @@ namespace DVPathTracer
                 settings.version = modEntry.Info.Version;
             }
 
+            try
+            {
+                if (UnityModManager.FindMod("Mph").Loaded)
+                {
+                    modEntry.Logger.Log("MPH mod is active, recording speeds in mph");
+                    settings.mph = true;
+                }
+                else if (settings.mph)
+                {
+                    modEntry.Logger.Log("MPH mod is not active but speeds are still being recorded in mph");
+                }
+            }
+            catch
+            {
+                // MPH mod is not installed
+            }
+
             var harmony = new Harmony(modEntry.Info.Id);
             harmony.PatchAll();
 

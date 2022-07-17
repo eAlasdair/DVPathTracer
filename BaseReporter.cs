@@ -7,8 +7,9 @@ namespace DVPathTracer
 {
     public static class BaseReporter
     {
-        public static string fileName = "DVTracedPath.csv";
-        private const string basePath = "./Mods/DVPathTracer/";
+        public const string defaultFilename = "DVTracedPath.csv";
+        public static string fileName = defaultFilename;
+        private const string basePath = "./Mods/DVPathTracer/sessions/";
 
         public const float seaLevel = 110;
 
@@ -60,15 +61,23 @@ namespace DVPathTracer
         }
 
         /**
-         * Creates an empty .csv file of the set name, overwriting any existing file
-         * The file will be .csv regardless of whether or not ".csv" is included in the set name
+         * Creates an empty .csv file named as the current date & time, unless told to use the default
          */
         private static void PrepareFile()
         {
-            fileName = Main.settings.fileName;
-            if (!fileName.EndsWith(".csv"))
+            if (!Directory.Exists(basePath))
             {
-                fileName += ".csv";
+                Directory.CreateDirectory(basePath);
+                Main.Log($"Session folder created");
+            }
+            if (Main.settings.useSystemTime)
+            {
+                var currentTime = DateTime.Now;
+                fileName = $"{currentTime:yyyyMMddHHmm}.csv"; // System time to nearest minute
+            }
+            else
+            {
+                fileName = defaultFilename;
             }
             File.WriteAllText(basePath + fileName, $"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
             Main.Log($"File {fileName} readied");
@@ -95,7 +104,9 @@ namespace DVPathTracer
             string report = $"{time},{player.Values},";
             List<int> toRemove = new List<int>();
 
-            foreach (int index in StockFinder.TrackedStock.Keys)
+            int index = 0;
+            int remainingStock = StockFinder.numStock;
+            while (index < StockFinder.TrackedStock.Keys.Count && remainingStock > 0)
             {
                 if (StockFinder.TrackedStock[index] == null) // No car to report on
                 {
@@ -106,15 +117,18 @@ namespace DVPathTracer
                     Main.Log($"Removing deleted car {StockFinder.TrackedStock[index].ID}");
                     report += $"{StockReporter.Headings},";
                     toRemove.Add(index);
+                    remainingStock--;
                 }
                 else
                 {
                     report += $"{StockFinder.TrackedStock[index].Values},";
+                    remainingStock--;
                 }
+                index++;
             }
-            foreach (int index in toRemove)
+            foreach (int i in toRemove)
             {
-                StockFinder.Remove(index);
+                StockFinder.Remove(i);
             }
             return report;
         }
