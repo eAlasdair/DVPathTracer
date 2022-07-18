@@ -53,7 +53,7 @@ namespace DVPathTracer
             }
             catch
             {
-                // MPH mod is not installed
+                // MPH mod is not installed, UMM reports this itself
             }
 
             var harmony = new Harmony(modEntry.Info.Id);

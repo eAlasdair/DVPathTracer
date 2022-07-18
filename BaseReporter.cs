@@ -73,7 +73,7 @@ namespace DVPathTracer
             if (Main.settings.useSystemTime)
             {
                 var currentTime = DateTime.Now;
-                fileName = $"{currentTime:yyyyMMddHHmm}.csv"; // System time to nearest minute
+                fileName = $"{currentTime:yyyyMMdd_HHmm}.csv"; // System time to nearest minute
             }
             else
             {
