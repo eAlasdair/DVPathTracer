@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 // TODO: Learn the what and *why* of C# fields vs properties
 
@@ -46,7 +47,7 @@ namespace DVPathTracer
         {
             get
             {
-                string type;
+                string type = "";
                 switch (Target.carType)
                 {
                     case TrainCarType.LocoShunter:
@@ -69,13 +70,17 @@ namespace DVPathTracer
                             {
                                 type = CCLInterface.CustomCarIndentifier(Target.carType);
                             }
-                            catch
+                            catch (Exception e)
                             {
+                                Main.Log(e.ToString());
                                 // It's either an error or just not CCL stock
                                 // TODO: this better
                             }
                         }
-                        type = Target.carType.ToString();
+                        if (type == "")
+                        {
+                            type = Target.carType.ToString();
+                        }
                         break;
                 }
                 return type;

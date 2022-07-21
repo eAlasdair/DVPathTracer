@@ -149,7 +149,7 @@ namespace DVPathTracer
                     {
                         report = GetReport(upTime);
                     }
-                    catch (Exception e) // No Report Available, skip
+                    catch //(Exception e) // No Report Available, skip
                                         // Should only ever happen while the game is loading
                     {
                         Main.Log($"No report at {upTime} available");
