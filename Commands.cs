@@ -110,7 +110,7 @@ namespace DVPathTracer
 
             Register("disablePreventActivationOnStartup", _ => {
                 Main.settings.forceStartInactive = false;
-                Terminal.Log("Tracer will remember if it was active when you end the game and will, if active on startup, overwrite any existing file.");
+                Terminal.Log("Tracer will remember whether or not it was active when you ended the game");
             });
 
             Register("enablePreventActivationOnStartup", _ => {

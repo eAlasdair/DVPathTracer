@@ -8,6 +8,7 @@ namespace DVPathTracer
         public static bool enabled;
         public static Settings settings = new Settings();
         public static UnityModManager.ModEntry entry;
+        internal static bool cclEnabled = false;
 
         /**
          * Mod entrypoint
@@ -16,7 +17,6 @@ namespace DVPathTracer
         public static bool Load(UnityModManager.ModEntry modEntry)
         {
             entry = modEntry;
-            Log("Hello World!");
 
             try
             {
@@ -54,6 +54,23 @@ namespace DVPathTracer
             catch
             {
                 // MPH mod is not installed, UMM reports this itself
+                if (settings.mph)
+                {
+                    modEntry.Logger.Log("Speeds are being recorded in mph");
+                }
+            }
+
+            try
+            {
+                if (UnityModManager.FindMod("DVCustomCarLoader").Loaded)
+                {
+                    modEntry.Logger.Log("CCL mod is active");
+                    cclEnabled = true;
+                }
+            }
+            catch
+            {
+                // CCL is not installed
             }
 
             var harmony = new Harmony(modEntry.Info.Id);

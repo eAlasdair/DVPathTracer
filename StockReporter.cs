@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DVCustomCarLoader;
 
 // TODO: Learn the what and *why* of C# fields vs properties
 
@@ -63,6 +64,18 @@ namespace DVPathTracer
                         break;
                     case TrainCarType.NotSet:
                     default:
+                        if (Main.cclEnabled)
+                        {
+                            try
+                            {
+                                type = CarTypeInjector.CustomCarByType(Target.carType).identifier;
+                            }
+                            catch
+                            {
+                                // It's either an error or just not CCL stock
+                                // TODO: this better
+                            }
+                        }
                         type = Target.carType.ToString();
                         break;
                 }
