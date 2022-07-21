@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseReporter.cs" />
+    <Compile Include="CCLInterface.cs" />
     <Compile Include="PlayerReporter.cs" />
     <Compile Include="StockFinder.cs" />
     <Compile Include="StockReporter.cs" />

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using DVCustomCarLoader;
 
 // TODO: Learn the what and *why* of C# fields vs properties
 
@@ -68,7 +67,7 @@ namespace DVPathTracer
                         {
                             try
                             {
-                                type = CarTypeInjector.CustomCarByType(Target.carType).identifier;
+                                type = CCLInterface.CustomCarIndentifier(Target.carType);
                             }
                             catch
                             {
