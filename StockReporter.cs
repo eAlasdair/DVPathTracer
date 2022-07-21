@@ -40,8 +40,7 @@ namespace DVPathTracer
         }
 
         /**
-         * Reader-friendly descriptor of the type of car, where convenient
-         * TODO: There's almost certainly a string label to find in the default case instead of just a number
+         * Reader-friendly descriptor of the type of car
          */
         public string Type
         {
@@ -70,9 +69,9 @@ namespace DVPathTracer
                             {
                                 type = CCLInterface.CustomCarIndentifier(Target.carType);
                             }
-                            catch (Exception e)
+                            catch //(Exception e)
                             {
-                                Main.Log(e.ToString());
+                                //Main.Log(e.ToString());
                                 // It's either an error or just not CCL stock
                                 // TODO: this better
                             }
