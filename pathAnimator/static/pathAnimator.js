@@ -104,7 +104,7 @@ $(document).ready(function() {
  */
 function loadFile(file) {
     if (file.type != 'text/csv') {
-        if (file.type.match(/image.*/) && $('#animationPlot').children().length) {
+        if (file.type.match(/image.*/)) {
             importBackgroundImage(file);
         } else {
             console.warn(`File must be csv, got ${file.type}`)
@@ -429,7 +429,11 @@ function importBackgroundImage(image) {
     var FR = new FileReader();
     FR.addEventListener('load', function(e) {
         $('#animationPlot').attr('src', e.target.result);
-        addBackgroundImage();
+        if ($('#animationPlot').children().length) {
+            addBackgroundImage();
+        } else {
+            alert("Image will load when data is imported.");
+        }
     });
     FR.readAsDataURL(image);
 }
