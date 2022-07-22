@@ -22,7 +22,7 @@ Import the file into Google Sheets or equivalent and go ham!
 - As of version 0.2.0 the tracer is always active by default.
   - This can be changed in the mod settings.
 - While active, the tracer will periodically write information to a csv file in the **sessions** folder of the folder this mod was installed to.  
-  *(i.e. /Derail Valley/Mods/DVPathTracer/sessions/\<dateandtime\>.csv)*
+  *(i.e. /Derail Valley/Mods/DVPathTracer/sessions/\<date\_time\>.csv)*
   - By default a new file is created every session; if this is disabled in the mod settings each new session will overwrite the file **DVTracedPath.csv**.
 
 ### Path Animator
@@ -55,16 +55,14 @@ The first 5 columns indicate information about you, the player:
 The following columns indicate information about all spawned locomotives and the caboose, in sets of 7:
 
 - `CID` The object's in-game identifier (e.g. **L-001**).
-- `CType` The type of rolling stock (e.g. **DE2**).  
-  ***Note:** The tracer will report a string of numbers for modded locos.  
-  This will be fixed in a future update.*
+- `CType` The type of rolling stock (e.g. **DE2**).
 - `CPosX` [m] Current x coordinate (distance from the *West* edge of the map).
 - `CPosY` [m] Current height (above sea level).
 - `CPosZ` [m] Current z coordinate (distance from the *South* edge of the map).
 - `CRotA` [&deg;] Current rotation about the vertical axis, in degrees from North (like a compass).
 - `CSpd` [Default: kph] Current reported speed.
   - Imperial units can be enabled in the mod settings.
-  - If the [MPH](https://www.nexusmods.com/derailvalley/mods/401) mod is also detected, imperial units will be enabled by default.
+  - If the [MPH](https://www.nexusmods.com/derailvalley/mods/401) mod is detected, imperial units will be enabled by default.
 
 Order is preserved to an extent - information about each object will occupy the same column it started in until that object despawns.
 After the object despawns, until a new object takes its place, the tracer will fill that space with the column headings listed above.
