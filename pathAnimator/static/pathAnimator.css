@@ -19,6 +19,14 @@ html, body {
     background-color: wheat;
 }
 
+#fpsSlider {
+    padding: 0 16px;
+}
+
+.noUi-tooltip {
+    font-size: 0.8rem;
+}
+
 .legendSpot {
     height: 25px;
     width: 25px;

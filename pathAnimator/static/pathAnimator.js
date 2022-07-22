@@ -73,6 +73,24 @@ $(document).ready(function() {
         $('#legend').append(element);
     }
 
+    // Create FPS slider
+    let fpsSlider = document.getElementById('fpsSlider');
+    noUiSlider.create(fpsSlider, {
+        start: [_fps],
+        tooltips: [wNumb({decimals: 0})],
+        step: 1,
+        range: {
+            'min': [1],
+            'max': [60]
+        },
+        format: wNumb({
+            decimals: 0
+        })
+    });
+    fpsSlider.noUiSlider.on('change', function() {
+        _fps = fpsSlider.noUiSlider.get();
+    });
+
     $('#plotButton').click(plotData);
     $('#timelapseButton').click(animateData);
 });
@@ -236,6 +254,7 @@ function plotData() {
     $('#plotButton').attr('disabled', true);
     $('#timelapseButton').attr('disabled', false);
     $('#animationPlot').empty()
+    $('#fpsOption').addClass('d-none');
 
     console.log('Plotting data');
 
@@ -300,6 +319,8 @@ function getPlottableFrames() {
  * Update each point being plotted in the timelapse
  */
 function update() {
+    console.log(_fps);
+    let nextFrame = 1000/_fps;
     if (!_animating) {
         return;
     }
@@ -319,13 +340,13 @@ function update() {
           //easing: 'linear',
         },
         frame: {
-            duration: 1000/_fps,
+            duration: nextFrame,
             redraw: false
         }
     };
     Plotly.animate( 'animationPlot', data, format);
     _frame = _frame >= _numFrames - 1 ? 0 : _frame + 1;
-    requestAnimationFrame(update);
+    setTimeout(requestAnimationFrame, nextFrame, update);
 }
 
 /**
@@ -336,6 +357,7 @@ function animateData() {
     $('#timelapseButton').attr('disabled', true);
     $('#plotButton').attr('disabled', false);
     $('#animationPlot').empty()
+    $('#fpsOption').removeClass('d-none');
     _frame = 0;
 
     console.log('Animating data');
