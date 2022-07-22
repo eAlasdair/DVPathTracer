@@ -319,7 +319,6 @@ function getPlottableFrames() {
  * Update each point being plotted in the timelapse
  */
 function update() {
-    console.log(_fps);
     let nextFrame = 1000/_fps;
     if (!_animating) {
         return;
