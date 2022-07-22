@@ -73,6 +73,11 @@ After the object despawns, until a new object takes its place, the tracer will f
 - More included analysis tools.
 - *Potentially* add tracing of active job cars.
 
+## Contributing
+
+I greatly appreciate enthusiasm for my project and any offers to contribute, however I am hesitant to accept them for a number of reasons.  
+**If you would like to contribute** please let me know in advance - in either the issue tracker here or the official Altfuture Discord (@Talkingpeanut).
+
 ## Many thanks
 
 This mod uses code for registering custom in-game terminal commands (i.e. **Commands.cs**) created by Miles "Zeibach" Spielberg.  
