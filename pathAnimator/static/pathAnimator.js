@@ -1,7 +1,7 @@
 // Dictionaries for player & rolling stock data
 var _playerData = {}; // Time: [X, Y, Z, ROT]
 var _carData = {};    // CID_TYP: {Time: [X, Y, Z, ROT, SPD]}
-const _idSep = '_';   //    ^ This symbol here
+const _idSep = ' ';   //    ^ This symbol here
 
 const _worldDimentions = [16360, 16360];
 
@@ -432,7 +432,7 @@ function importBackgroundImage(image) {
         if ($('#animationPlot').children().length) {
             addBackgroundImage();
         } else {
-            alert("Image will load when data is imported.");
+            alert("Image will render when your traced path (csv) is loaded.");
         }
     });
     FR.readAsDataURL(image);
