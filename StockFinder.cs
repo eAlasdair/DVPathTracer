@@ -55,7 +55,6 @@ namespace DVPathTracer
                 if (trackedStock[index] == car)
                 {
                     Remove(index);
-                    numStock--;
                     return;
                 }
             }
@@ -67,7 +66,6 @@ namespace DVPathTracer
                 if (trackedStock[index].Target == car)
                 {
                     Remove(index);
-                    numStock--;
                     return;
                 }
             }
