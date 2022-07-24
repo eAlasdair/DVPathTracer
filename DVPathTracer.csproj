@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DVPathTracer</RootNamespace>
     <AssemblyName>DVPathTracer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,9 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>D:\Games\SteamLibrary\steamapps\common\Derail Valley\DerailValley_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
+    <Reference Include="DVCustomCarLoader">
+      <HintPath>..\..\..\CCL\DVCustomCarLoader.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseReporter.cs" />
+    <Compile Include="CCLInterface.cs" />
     <Compile Include="PlayerReporter.cs" />
     <Compile Include="StockFinder.cs" />
     <Compile Include="StockReporter.cs" />
@@ -74,6 +79,7 @@
   <ItemGroup>
     <None Include="info.json" />
     <None Include="README.md" />
+    <None Include="repository.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="readmeAssets\" />

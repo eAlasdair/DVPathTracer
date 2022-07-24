@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 // TODO: Learn the what and *why* of C# fields vs properties
 
@@ -39,14 +40,13 @@ namespace DVPathTracer
         }
 
         /**
-         * Reader-friendly descriptor of the type of car, where convenient
-         * TODO: There's almost certainly a string label to find in the default case instead of just a number
+         * Reader-friendly descriptor of the type of car
          */
         public string Type
         {
             get
             {
-                string type;
+                string type = "";
                 switch (Target.carType)
                 {
                     case TrainCarType.LocoShunter:
@@ -63,7 +63,23 @@ namespace DVPathTracer
                         break;
                     case TrainCarType.NotSet:
                     default:
-                        type = Target.carType.ToString();
+                        if (Main.cclEnabled)
+                        {
+                            try
+                            {
+                                type = CCLInterface.CustomCarIndentifier(Target.carType);
+                            }
+                            catch //(Exception e)
+                            {
+                                //Main.Log(e.ToString());
+                                // It's either an error or just not CCL stock
+                                // TODO: this better
+                            }
+                        }
+                        if (type == "")
+                        {
+                            type = Target.carType.ToString();
+                        }
                         break;
                 }
                 return type;
@@ -114,9 +130,8 @@ namespace DVPathTracer
             if (Main.settings.mph)
             {
                 return speed * (float) 2.23694;
-            } else {
-                return speed * (float) 3.6;
             }
+            return speed * (float) 3.6;
         }
     }
 }

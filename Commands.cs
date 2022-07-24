@@ -49,34 +49,6 @@ namespace DVPathTracer
                 Terminal.Log(BaseReporter.player.Rotation.ToString());
             });
 
-            Register("whatFile", _ => {
-                Terminal.Log($"Tracer is set to use file: {Main.settings.fileName}");
-            });
-
-            Register("setFileTo", args => {
-                if (!BaseReporter.isActive)
-                {
-                    if (args.Length > 0)
-                    {
-                        string newFile = args[0].String;
-                        if (!newFile.EndsWith(".csv"))
-                        {
-                            newFile += ".csv";
-                        }
-                        Main.settings.fileName = newFile;
-                        Terminal.Log($"Tracer set to use file: {newFile}");
-                    }
-                    else
-                    {
-                        Terminal.Log($"ERROR: Provide a file to use!");
-                    }
-                }
-                else
-                {
-                    Terminal.Log($"ERROR: Cannot change file while the tracer is active!");
-                }
-            });
-
             Register("whatReportInterval", _ => {
                 Terminal.Log($"Tracer is set to report every {Main.settings.logRate} seconds");
             });
@@ -138,7 +110,7 @@ namespace DVPathTracer
 
             Register("disablePreventActivationOnStartup", _ => {
                 Main.settings.forceStartInactive = false;
-                Terminal.Log("Tracer will remember if it was active when you end the game and will, if active on startup, overwrite any existing file.");
+                Terminal.Log("Tracer will remember whether or not it was active when you ended the game");
             });
 
             Register("enablePreventActivationOnStartup", _ => {

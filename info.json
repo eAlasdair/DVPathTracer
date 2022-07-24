@@ -2,8 +2,10 @@
   "Id": "DVPathTracer",
   "DisplayName": "DV Path Tracer",
   "Author": "Talkingpeanut",
-  "Version": "0.2.0",
+  "Version": "0.3.0",
+  "LoadAfter": [ "DVCustomCarLoader", "Mph" ],
   "AssemblyName": "DVPathTracer.dll",
   "EntryMethod": "DVPathTracer.Main.Load",
-  "HomePage": "https://www.nexusmods.com/derailvalley/mods/425"
+  "HomePage": "https://www.nexusmods.com/derailvalley/mods/425",
+  "Repository": "https://raw.githubusercontent.com/eAlasdair/DVPathTracer/main/repository.json"
 }

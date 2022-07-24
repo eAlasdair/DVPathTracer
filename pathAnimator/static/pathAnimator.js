@@ -1,7 +1,7 @@
 // Dictionaries for player & rolling stock data
 var _playerData = {}; // Time: [X, Y, Z, ROT]
 var _carData = {};    // CID_TYP: {Time: [X, Y, Z, ROT, SPD]}
-const _idSep = '_';   //    ^ This symbol here
+const _idSep = ' ';   //    ^ This symbol here
 
 const _worldDimentions = [16360, 16360];
 
@@ -73,6 +73,24 @@ $(document).ready(function() {
         $('#legend').append(element);
     }
 
+    // Create FPS slider
+    let fpsSlider = document.getElementById('fpsSlider');
+    noUiSlider.create(fpsSlider, {
+        start: [_fps],
+        tooltips: [wNumb({decimals: 0})],
+        step: 1,
+        range: {
+            'min': [1],
+            'max': [60]
+        },
+        format: wNumb({
+            decimals: 0
+        })
+    });
+    fpsSlider.noUiSlider.on('change', function() {
+        _fps = fpsSlider.noUiSlider.get();
+    });
+
     $('#plotButton').click(plotData);
     $('#timelapseButton').click(animateData);
 });
@@ -86,7 +104,7 @@ $(document).ready(function() {
  */
 function loadFile(file) {
     if (file.type != 'text/csv') {
-        if (file.type.match(/image.*/) && $('#animationPlot').children().length) {
+        if (file.type.match(/image.*/)) {
             importBackgroundImage(file);
         } else {
             console.warn(`File must be csv, got ${file.type}`)
@@ -236,6 +254,7 @@ function plotData() {
     $('#plotButton').attr('disabled', true);
     $('#timelapseButton').attr('disabled', false);
     $('#animationPlot').empty()
+    $('#fpsOption').addClass('d-none');
 
     console.log('Plotting data');
 
@@ -300,6 +319,7 @@ function getPlottableFrames() {
  * Update each point being plotted in the timelapse
  */
 function update() {
+    let nextFrame = 1000/_fps;
     if (!_animating) {
         return;
     }
@@ -319,13 +339,13 @@ function update() {
           //easing: 'linear',
         },
         frame: {
-            duration: 1000/_fps,
+            duration: nextFrame,
             redraw: false
         }
     };
     Plotly.animate( 'animationPlot', data, format);
     _frame = _frame >= _numFrames - 1 ? 0 : _frame + 1;
-    requestAnimationFrame(update);
+    setTimeout(requestAnimationFrame, nextFrame, update);
 }
 
 /**
@@ -336,6 +356,7 @@ function animateData() {
     $('#timelapseButton').attr('disabled', true);
     $('#plotButton').attr('disabled', false);
     $('#animationPlot').empty()
+    $('#fpsOption').removeClass('d-none');
     _frame = 0;
 
     console.log('Animating data');
@@ -407,7 +428,11 @@ function importBackgroundImage(image) {
     var FR = new FileReader();
     FR.addEventListener('load', function(e) {
         $('#animationPlot').attr('src', e.target.result);
-        addBackgroundImage();
+        if ($('#animationPlot').children().length) {
+            addBackgroundImage();
+        } else {
+            alert("Image will render when your traced path (csv) is loaded.");
+        }
     });
     FR.readAsDataURL(image);
 }

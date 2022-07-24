@@ -5,7 +5,6 @@ namespace DVPathTracer
     public class Settings : UnityModManager.ModSettings, IDrawable
     {
         public string version;
-        public string fileName = "DVTracedPath.csv";
 
         [Draw("Report rate (seconds per report)", Min = 1f)]
         public float logRate = 5f;
@@ -18,6 +17,9 @@ namespace DVPathTracer
 
         [Draw("Prevent activation on startup")]
         public bool forceStartInactive = false;
+
+        [Draw("Save each session to a new file")]
+        public bool useSystemTime = true;
 
         override public void Save(UnityModManager.ModEntry entry)
         {
