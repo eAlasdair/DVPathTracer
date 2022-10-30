@@ -3,7 +3,7 @@ var _playerData = {}; // Time: [X, Y, Z, ROT]
 var _carData = {};    // CID_TYP: {Time: [X, Y, Z, ROT, SPD]}
 const _idSep = ' ';   //    ^ This symbol here
 
-const _worldDimentions = [16360, 16360];
+const _worldDimensions = [16360, 16360];
 
 var _traces = [];
 var _frames = [];
@@ -261,12 +261,12 @@ function plotData() {
     let layout = {
         showlegend: true,
         xaxis: {
-            range: [0, _worldDimentions[0]],
+            range: [0, _worldDimensions[0]],
             visible: false,
             showgrid: false
         },
         yaxis: {
-            range: [0, _worldDimentions[1]],
+            range: [0, _worldDimensions[1]],
             scaleanchor: 'x',
             visible: false,
             showgrid: false
@@ -367,12 +367,12 @@ function animateData() {
         mode: 'markers'
     }], {
         xaxis: {
-            range: [0, _worldDimentions[0]],
+            range: [0, _worldDimensions[0]],
             visible: false,
             showgrid: false
         },
         yaxis: {
-            range: [0, _worldDimentions[1]],
+            range: [0, _worldDimensions[1]],
             scaleanchor: 'x',
             visible: false,
             showgrid: false
@@ -407,9 +407,9 @@ function addBackgroundImage() {
                 'xref': 'x',
                 'yref': 'y',
                 'x': 0,
-                'y': _worldDimentions[1],
-                'sizex': _worldDimentions[0],
-                'sizey': _worldDimentions[1],
+                'y': _worldDimensions[1],
+                'sizex': _worldDimensions[0],
+                'sizey': _worldDimensions[1],
                 'sizing': 'stretch',
                 'opacity': 0.6,
                 'layer': 'below'
