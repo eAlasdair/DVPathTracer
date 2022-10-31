@@ -26,7 +26,11 @@ const _carDataIndices = [
     'Y',
     'Z',
     'ROT',
-    'SPD'
+    'SPD',
+    'C%',
+    'Cg',
+    'CgTYP',
+    'Cg%'
 ];
 
 const _colours = {
@@ -35,6 +39,7 @@ const _colours = {
     'DE2':     '#ff7f0e',
     'DE6':     '#8c564b',
     'SH282':   '#111111',
+    'Tender':  '#111111',
     'Mod':     '#2ca02c'
 };
 
