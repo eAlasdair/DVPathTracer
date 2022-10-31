@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using DV.Logic.Job;
 
 // TODO: Learn the what and *why* of C# fields vs properties
 
@@ -18,13 +19,23 @@ namespace DVPathTracer
         }
 
         // C = 'Car' (includes locos)
-        public const string Headings = "CID,CType,CPosX,CPosY,CPosZ,CRotA,CSpd";
+        // Cg = 'Cargo' loaded in car (if applicable)
+        public const string Headings = "CID,CType,CPosX,CPosY,CPosZ,CRotA,CSpd,C%,Cargo,CgTyp,Cg%";
 
         public string Values
         {
             get
             {
-                return $"{ID},{Type},{Position.x},{Position.y - BaseReporter.seaLevel},{Position.z},{Rotation},{SpeedUnits(Speed)}";
+                string values = $"{ID},{Type},{Position.x},{Position.y - BaseReporter.seaLevel},{Position.z},{Rotation},{SpeedUnits(Speed)},{CarHealth}";
+                if (Target.LoadedCargo == CargoType.None)
+                {
+                    values += ",None,N/A,N/A";
+                }
+                else
+                {
+                    values += $",{Cargo},{CargoCategory},{CargoHealth}";
+                }
+                return values;
             }
         }
 
@@ -136,6 +147,72 @@ namespace DVPathTracer
                 Vector3 planeRotation = Vector3.ProjectOnPlane(locoTransform.forward, Vector3.up);
                 float rotationAngle = Mathf.Atan2(planeRotation.x, planeRotation.z) * Mathf.Rad2Deg;
                 return rotationAngle >= 0 ? rotationAngle : 360 + rotationAngle;
+            }
+        }
+
+        /**
+         * Car health, %
+         */
+        public float CarHealth
+        {
+            get
+            {
+                //Main.Log($"Car health of {ID}: {Target.CarDamage.EffectiveHealthPercentage100Notation}");
+                return Target.CarDamage.EffectiveHealthPercentage100Notation;
+            }
+        }
+
+        /**
+         * Cargo health, %
+         */
+        public float CargoHealth
+        {
+            get
+            {
+                //Main.Log($"Cargo health of {ID}: {Target.CargoDamage.EffectiveHealthPercentage100Notation}");
+                return Target.CargoDamage.EffectiveHealthPercentage100Notation;
+            }
+        }
+
+        /**
+         * Cargo name
+         */
+        public string Cargo
+        {
+            get
+            {
+                Main.Log($"Cargo of {ID}: {CargoTypes.GetCargoName(Target.LoadedCargo)}");
+                return CargoTypes.GetCargoName(Target.LoadedCargo);
+            }
+        }
+
+        /**
+         * DVPT-specific human-readable category for use in animator
+         */
+        public string CargoCategory
+        {
+            get
+                // ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? idk
+            {
+                return "TODO";
+                /*
+                // Mil>Haz>Inert>Empty if more than one apply
+                if (CargoTypes.Hazmat3Cargo.Contains(Target.LoadedCargo))
+                {
+                    return "HZMT1";
+                }
+                if (CargoTypes.Hazmat3Cargo.Contains(Target.LoadedCargo))
+                {
+                    return "HZMT3";
+                }
+                if (CargoTypes.Hazmat2Cargo.Contains(Target.LoadedCargo))
+                {
+                    return "HZMT2";
+                }
+                if (CargoTypes.Hazmat1Cargo.Contains(Target.LoadedCargo))
+                {
+                    return "HZMT1";
+                }*/
             }
         }
 
