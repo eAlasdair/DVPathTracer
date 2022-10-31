@@ -8,10 +8,10 @@ namespace DVPathTracer
 {
     public class StockReporter
     {
-        public TrainCar Target { get; set; }
+        public TrainCar Target { get; private set; }
 
         /**
-         * Rolling stock reporter, reports on the given train car (Currently exclusively a loco or the caboose)
+         * Rolling stock reporter, reports on the given train car (inc. locos, caboose)
          */
         public StockReporter(TrainCar car)
         {
@@ -29,7 +29,16 @@ namespace DVPathTracer
                 string values = $"{ID},{Type},{Position.x},{Position.y - BaseReporter.seaLevel},{Position.z},{Rotation},{SpeedUnits(Speed)},{CarHealth}";
                 if (Target.LoadedCargo == CargoType.None)
                 {
-                    values += ",None,N/A,N/A";
+                    if (CargoTypes.Military1CarContainers.Contains(CargoTypes.CarTypeToContainerType[Target.carType]))
+                    {
+                        // Military 1 licence allows LH jobs of military cars - it's more interesting to class as MIL1 despite being empty
+                        values += ",None,MIL1,N/A";
+                    }
+                    else
+                    {
+                        // Loco, caboose, or otherwise unloaded car
+                        values += ",None,N/A,N/A";
+                    }
                 }
                 else
                 {
@@ -40,6 +49,7 @@ namespace DVPathTracer
         }
 
         /**
+         * In-game ID
          * L-001 etc
          */
         public string ID
@@ -157,7 +167,6 @@ namespace DVPathTracer
         {
             get
             {
-                //Main.Log($"Car health of {ID}: {Target.CarDamage.EffectiveHealthPercentage100Notation}");
                 return Target.CarDamage.EffectiveHealthPercentage100Notation;
             }
         }
@@ -169,37 +178,37 @@ namespace DVPathTracer
         {
             get
             {
-                //Main.Log($"Cargo health of {ID}: {Target.CargoDamage.EffectiveHealthPercentage100Notation}");
                 return Target.CargoDamage.EffectiveHealthPercentage100Notation;
             }
         }
 
         /**
-         * Cargo name
+         * In-game name of the cargo
          */
         public string Cargo
         {
             get
             {
-                Main.Log($"Cargo of {ID}: {CargoTypes.GetCargoName(Target.LoadedCargo)}");
                 return CargoTypes.GetCargoName(Target.LoadedCargo);
             }
         }
 
         /**
-         * DVPT-specific human-readable category for use in animator
+         * DVPT-specific human-readable category of loaded cargo for use in animator
+         * Assumes there is loaded cargo to categorise
          */
         public string CargoCategory
         {
             get
-                // ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? idk
             {
-                return "TODO";
-                /*
-                // Mil>Haz>Inert>Empty if more than one apply
-                if (CargoTypes.Hazmat3Cargo.Contains(Target.LoadedCargo))
+                // Mil>Haz if more than one apply
+                if (CargoTypes.Military3Cargo.Contains(Target.LoadedCargo))
                 {
-                    return "HZMT1";
+                    return "MIL3";
+                }
+                if (CargoTypes.Military2Cargo.Contains(Target.LoadedCargo))
+                {
+                    return "MIL2";
                 }
                 if (CargoTypes.Hazmat3Cargo.Contains(Target.LoadedCargo))
                 {
@@ -212,7 +221,8 @@ namespace DVPathTracer
                 if (CargoTypes.Hazmat1Cargo.Contains(Target.LoadedCargo))
                 {
                     return "HZMT1";
-                }*/
+                }
+                return "Inert";
             }
         }
 
