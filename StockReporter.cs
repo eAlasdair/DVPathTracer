@@ -83,43 +83,27 @@ namespace DVPathTracer
                 }
                 if (type == "")
                 {
-                    type = Target.carType.ToString();
-                }
-                /*switch (Target.carType)
-                {
-                    case TrainCarType.LocoShunter:
-                        type = "DE2";
-                        break;
-                    case TrainCarType.LocoSteamHeavy:
-                        type = "SH282";
-                        break;
-                    case TrainCarType.LocoDiesel:
-                        type = "DE6";
-                        break;
-                    case TrainCarType.CabooseRed:
-                        type = "Caboose";
-                        break;
-                    case TrainCarType.NotSet:
-                    default:
-                        if (Main.cclEnabled)
-                        {
-                            try
-                            {
-                                type = CCLInterface.CustomCarIndentifier(Target.carType);
-                            }
-                            catch //(Exception e)
-                            {
-                                //Main.Log(e.ToString());
-                                // It's either an error or just not CCL stock
-                                // TODO: this better
-                            }
-                        }
-                        if (type == "")
-                        {
+                    switch (Target.carType)
+                    {
+                        case TrainCarType.LocoShunter:
+                            type = "DE2";
+                            break;
+                        case TrainCarType.LocoSteamHeavy:
+                            type = "SH282";
+                            break;
+                        case TrainCarType.LocoDiesel:
+                            type = "DE6";
+                            break;
+                        case TrainCarType.CabooseRed:
+                            type = "Caboose";
+                            break;
+                        case TrainCarType.NotSet:
+                        default:
                             type = Target.carType.ToString();
-                        }
-                        break;
-                }*/
+                            break;
+                    }
+                }
+                
                 return type;
             }
         }
