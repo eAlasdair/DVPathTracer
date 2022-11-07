@@ -20,7 +20,7 @@ namespace DVPathTracer
 
         // C = 'Car' (includes locos)
         // Cg = 'Cargo' loaded in car (if applicable)
-        public const string Headings = "CID,CType,CPosX,CPosY,CPosZ,CRotA,CSpd,C%,Cargo,CgTyp,Cg%";
+        public const string Headings = "CID,CType,CPosX,CPosY,CPosZ,CRotA,CSpd,C%,CgType,CgCat,Cg%";
 
         public string Values
         {

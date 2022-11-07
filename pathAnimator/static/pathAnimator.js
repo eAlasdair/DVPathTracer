@@ -28,8 +28,8 @@ const _carDataIndices = [
     'ROT',
     'SPD',
     'C%',
-    'Cg',
     'CgTYP',
+    'CgCAT',
     'Cg%'
 ];
 
