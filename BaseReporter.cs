@@ -114,7 +114,7 @@ namespace DVPathTracer
                 }
                 else if (StockFinder.TrackedStock[index].ID == String.Empty) // Car no longer exists
                 {
-                    Main.Log($"Removing deleted car {StockFinder.TrackedStock[index].ID}");
+                    //Main.Log($"Removing deleted car {StockFinder.TrackedStock[index].ID}");
                     report += $"{StockReporter.Headings},";
                     toRemove.Add(index);
                     remainingStock--;
