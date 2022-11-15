@@ -85,13 +85,13 @@ namespace DVPathTracer
             TrainCar[] allCars = UnityEngine.Object.FindObjectsOfType<TrainCar>();
             foreach (TrainCar car in allCars)
             {
-                //if (car.IsLoco || car.carType == TrainCarType.CabooseRed)
-                //{
-                    if (!IsTracking(car))
+                if (!IsTracking(car))
+                {
+                    if (Main.settings.trackFreight || car.IsLoco || car.carType == TrainCarType.CabooseRed)
                     {
                         Add(car);
                     }
-                //}
+                }
             }
         }
     }
