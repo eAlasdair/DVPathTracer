@@ -79,7 +79,8 @@ namespace DVPathTracer
             {
                 fileName = defaultFilename;
             }
-            File.WriteAllText(basePath + fileName, $"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
+            File.WriteAllText(basePath + fileName, $"DVPathTracer,{Main.entry.Info.Version}\n");
+            WriteToFile($"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
             Main.Log($"File {fileName} readied");
         }
 

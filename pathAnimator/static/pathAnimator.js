@@ -19,7 +19,7 @@ const _playerDataIndices = [
     'ROT'
 ];
 
-const _carDataIndices = [
+const _allCarDataIndices = [
     'CID',
     'TYP',
     'X',
@@ -32,6 +32,8 @@ const _carDataIndices = [
     'CgCAT',
     'Cg%'
 ];
+
+var _carDataIndices = _allCarDataIndices;
 
 const _colours = {
     'Player':  '#1f77b4',
@@ -136,7 +138,8 @@ function interpretFile(fileString) {
     _carData = {};
     let lines = fileString.split('\n');
     console.log(`Reading ${lines.length} lines...`);
-    for (let i=0; i < lines.length; i++) {
+    interpretMetadataLine(lines[0].trim().split(','));
+    for (let i=1; i < lines.length; i++) {
         let elements = lines[i].trim().split(',');
 
         let time = parseInt(elements.splice(0, 1));
@@ -156,7 +159,21 @@ function interpretFile(fileString) {
 }
 
 /**
- * Interprets a substring of data relevant to info about the player
+ * Interprets an array of data about the tracer that created the file
+ */
+function interpretMetadataLine(line) {
+    if (line[0] != 'DVPathTracer') {
+        // Traced path was made using 0.3.0 or earlier
+        console.log("Tracer version: 0.3 or earlier");
+        _carDataIndices = _allCarDataIndices.slice(0,7);
+    } else {
+        console.log(`Tracer version: ${line[1]}`);
+        _carDataIndices = _allCarDataIndices;
+    }
+}
+
+/**
+ * Interprets an array of data relevant to info about the player
  */
 function interpretPlayerLine(time, line) {
     if (line.length < 4 || line[0] == '' || line[0] == 'PPosX') {
@@ -172,7 +189,7 @@ function interpretPlayerLine(time, line) {
 }
 
 /**
- * Interprets a substring of data relevant to info about one piece of rolling stock
+ * Interprets an array of data relevant to info about one piece of rolling stock
  */
 function interpretCarLine(time, line) {
     if (line.length < 6 || line[0] == '' ||  line[0] == 'CID') {
