@@ -80,7 +80,7 @@ const _colours = {
     'CPS':      '#a3a3ff', // Passenger car
     'CPSL':     '#7879ff',
 
-    'Unknown':  '#9969c7', // (usually) A modded car that was assigned the C (crew) prefix, rather than one of the triples above
+    'Unknown':  '#9969c7', // (usually) A modded car that was assigned the generic C prefix, rather than one of the triples above
     'UnknownL': '#6a359c'
 };
 
@@ -200,7 +200,7 @@ function interpretFile(fileString) {
 function interpretMetadataLine(line) {
     if (line[0] != 'DVPathTracer') {
         // Traced path was made using 0.3.0 or earlier
-        console.log("Tracer version: 0.3 or earlier");
+        console.log("Tracer version: 0.3.0 or earlier");
         _carDataIndices = _allCarDataIndices.slice(0,5);
         _tracerVersion = 0;
     } else {
