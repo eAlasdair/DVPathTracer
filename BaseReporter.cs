@@ -79,7 +79,8 @@ namespace DVPathTracer
             {
                 fileName = defaultFilename;
             }
-            File.WriteAllText(basePath + fileName, $"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
+            File.WriteAllText(basePath + fileName, $"DVPathTracer,{Main.entry.Info.Version}\n");
+            WriteToFile($"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
             Main.Log($"File {fileName} readied");
         }
 
@@ -114,7 +115,7 @@ namespace DVPathTracer
                 }
                 else if (StockFinder.TrackedStock[index].ID == String.Empty) // Car no longer exists
                 {
-                    Main.Log($"Removing deleted car {StockFinder.TrackedStock[index].ID}");
+                    //Main.Log($"Removing deleted car {StockFinder.TrackedStock[index].ID}");
                     report += $"{StockReporter.Headings},";
                     toRemove.Add(index);
                     remainingStock--;
