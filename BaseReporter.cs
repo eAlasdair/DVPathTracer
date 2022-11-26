@@ -79,7 +79,7 @@ namespace DVPathTracer
             {
                 fileName = defaultFilename;
             }
-            File.WriteAllText(basePath + fileName, $"DVPathTracer,{Main.entry.Info.Version}\n");
+            File.WriteAllText(basePath + fileName, $"DVPathTracer,{Main.entry.Info.Version},Verbose Tracing,{Main.verboseTracing}\n");
             WriteToFile($"Time,{PlayerReporter.Headings},{StockReporter.Headings},{StockReporter.Headings}\n");
             Main.Log($"File {fileName} readied");
         }
@@ -111,18 +111,30 @@ namespace DVPathTracer
             {
                 if (StockFinder.TrackedStock[index] == null) // No car to report on
                 {
-                    report += $"{StockReporter.Headings},";
+                    if (Main.verboseTracing)
+                    {
+                        // Preserve column order
+                        report += $"{StockReporter.Headings},";
+                    }
                 }
-                else if (StockFinder.TrackedStock[index].ID == String.Empty) // Car no longer exists
+                else if (StockFinder.TrackedStock[index].Target.ID == String.Empty) // Car no longer exists
                 {
-                    //Main.Log($"Removing deleted car {StockFinder.TrackedStock[index].ID}");
-                    report += $"{StockReporter.Headings},";
+                    if (Main.verboseTracing)
+                    {
+                        report += $"{StockReporter.Headings},";
+                    }
+                    else
+                    {
+                        report += $"{StockFinder.TrackedStock[index].Removed},";
+                    }
                     toRemove.Add(index);
                     remainingStock--;
                 }
                 else
                 {
-                    report += $"{StockFinder.TrackedStock[index].Values},";
+                    string values = StockFinder.TrackedStock[index].Values;
+                    // Adding the comma is awkward but I want it done here for consistency
+                    if (values != "") report += $"{values},";
                     remainingStock--;
                 }
                 index++;

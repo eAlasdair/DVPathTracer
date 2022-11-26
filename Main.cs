@@ -9,6 +9,7 @@ namespace DVPathTracer
         public static Settings settings = new Settings();
         public static UnityModManager.ModEntry entry;
         internal static bool cclEnabled = false;
+        internal static bool verboseTracing = false;
 
         /**
          * Mod entrypoint
@@ -31,6 +32,7 @@ namespace DVPathTracer
                 {
                     settings.isActive = false;
                 }
+                verboseTracing = settings.verboseTracing;
                 modEntry.Logger.Log("Settings loaded");
             }
             catch
