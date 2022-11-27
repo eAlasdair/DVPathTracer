@@ -1,6 +1,7 @@
 // Dictionaries for player & rolling stock data
 var _playerData = {}; // Time: [X, Y, Z, ROT]
 var _carData = {};    // CID_TYP: {Time: [X, Y, Z, ROT, SPD, H, CgTYP, CgCAT, CgH]}
+const _activeCars = new Set();
 const _idSep = ' ';   //    ^ This symbol here
 
 const _worldDimensions = [16360, 16360];
@@ -11,6 +12,9 @@ var _frame = 0;
 var _numFrames = 0;
 var _fps = 24;
 var _animating = false;
+var _verboseTrace = false;
+var _prevTime = 0;
+
 // Each major version indicates a change/addition to the columns of data created
 var _tracerVersion;
 
@@ -172,6 +176,7 @@ function interpretFile(fileString) {
     console.log('Interpreting file...')
     _playerData = {};
     _carData = {};
+    _activeCars.clear();
     let lines = fileString.split('\n');
     console.log(`Reading ${lines.length} lines...`);
     interpretMetadataLine(lines[0].trim().split(','));
@@ -187,6 +192,17 @@ function interpretFile(fileString) {
         while (elements.length > 0) {
             interpretCarLine(time, elements.splice(0, _carDataIndices.length + 2));
         }
+
+        // Deal with the remaining spawned cars
+        if (!_verboseTrace) {
+            for (const car of _activeCars) {
+                if (!_carData[car][time]) {
+                    _carData[car][time] = _carData[car][_prevTime]
+                }
+              }
+        }
+
+        _prevTime = time;
     }
     _traces = getPlottableTraces();
     _frames = getPlottableFrames();
@@ -199,14 +215,18 @@ function interpretFile(fileString) {
  */
 function interpretMetadataLine(line) {
     if (line[0] != 'DVPathTracer') {
-        // Traced path was made using 0.3.0 or earlier
+        // No metadata line
         console.log("Tracer version: 0.3.0 or earlier");
         _carDataIndices = _allCarDataIndices.slice(0,5);
         _tracerVersion = 0;
+        _verboseTrace = true;
     } else {
         console.log(`Tracer version: ${line[1]}`);
         _carDataIndices = _allCarDataIndices;
         _tracerVersion = 1;
+
+        _verboseTrace = (line[3] == 'True');
+        console.log(`Verbose trace: ${_verboseTrace}`);
     }
 }
 
@@ -215,7 +235,6 @@ function interpretMetadataLine(line) {
  */
 function interpretPlayerLine(time, line) {
     if (line.length < 4 || line[0] == '' || line[0] == 'PPosX') {
-        // 4 is the minimum complete number of columns there will ever be for this
         return
     }
     _playerData[time] = [
@@ -231,10 +250,13 @@ function interpretPlayerLine(time, line) {
  */
 function interpretCarLine(time, line) {
     if (line.length < 6 || line[0] == '' ||  line[0] == 'CID') {
-        // 6 is the minimum complete number of columns there will ever be for this
         return;
     }
     let idType = line[0] + _idSep + line[1];
+    if (!_verboseTrace && line[2] == 'Removed') {
+        _activeCars.delete(idType);
+        return
+    }
     let result = [
         parseFloat(line[2]),
         parseFloat(line[3]),
@@ -254,6 +276,7 @@ function interpretCarLine(time, line) {
         _carData[idType] = {};
     }
     _carData[idType][time] = result;
+    _activeCars.add(idType);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
