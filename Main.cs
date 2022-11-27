@@ -32,7 +32,6 @@ namespace DVPathTracer
                 {
                     settings.isActive = false;
                 }
-                verboseTracing = settings.verboseTracing;
                 modEntry.Logger.Log("Settings loaded");
             }
             catch
@@ -41,6 +40,7 @@ namespace DVPathTracer
                 settings.version = modEntry.Info.Version;
             }
 
+            verboseTracing = settings.verboseTracing;
             try
             {
                 if (UnityModManager.FindMod("Mph").Loaded)
