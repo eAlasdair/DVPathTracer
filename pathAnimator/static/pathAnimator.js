@@ -1,8 +1,8 @@
 // Dictionaries for player & rolling stock data
 var _playerData = {}; // Time: [X, Y, Z, ROT]
 var _carData = {};    // CID_TYP: {Time: [X, Y, Z, ROT, SPD, H, CgTYP, CgCAT, CgH]}
-const _activeCars = new Set();
 const _idSep = ' ';   //    ^ This symbol here
+const _activeCars = new Set();
 
 const _worldDimensions = [16360, 16360];
 
