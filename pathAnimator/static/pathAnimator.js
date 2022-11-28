@@ -58,10 +58,10 @@ const _colours = {
     // CXB - mil. boxcar
     // CXF - mil. flatcar
 
-    // 'HZMT1':    '#ffa80f',
-    // 'HZMT2':    '#fe8116',
-    // 'HZMT3':    '#fe5a1d',
-    // 'Inert':    '#696969',
+    // 'HZMT1':    '#',
+    // 'HZMT2':    '#',
+    // 'HZMT3':    '#',
+    // 'Inert':    '#',
 
     'CFF':      '#bdbdbd', // flatbed
     'CFFL':     '#8b8b8b',

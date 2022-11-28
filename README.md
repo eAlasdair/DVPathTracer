@@ -52,7 +52,7 @@ The first 5 columns indicate information about you, the player:
 
 ### Rolling stock information:
 
-The following columns indicate information about all spawned locomotives and the caboose, in sets of 7:
+The following columns indicate information about all spawned rolling stock, in sets of 11:
 
 - `CID` The object's in-game identifier (e.g. **L-001**).
 - `CType` The type of rolling stock (e.g. **DE2**).
@@ -63,15 +63,25 @@ The following columns indicate information about all spawned locomotives and the
 - `CSpd` [Default: kph] Current reported speed.
   - Imperial units can be enabled in the mod settings.
   - If the [MPH](https://www.nexusmods.com/derailvalley/mods/401) mod is detected, imperial units will be enabled by default.
+- `C%` [%] Car health
+- `CgType` Type of loaded cargo (e.g. **None**, or **Tractors**)
+- `CgCat` DVPT-specific cargo category if applicable (Currently Military, Hazmat or Inert)
+- `Cg%` [%] Cargo health if applicable
 
-Order is preserved to an extent - information about each object will occupy the same column it started in until that object despawns.
+## Verbose tracing
+
+With verbose tracing enabled, this information will be reported for every piece of rolling stock every iteration.
+Order is also preserved to an extent - information about each object will occupy the same column it started in until that object despawns.
 After the object despawns, until a new object takes its place, the tracer will fill that space with the column headings listed above.
+
+With the default behaviour, information will only be reported when the object is moved or changes state.
+Naturally, this is a far more performant option.
 
 ## Future Plans
 
+- Remake the timelapsing tool for better performance and aesthetics.
 - Improve ability to trace across multiple sessions.
 - More included analysis tools.
-- *Potentially* add tracing of active job cars.
 
 ## Contributing
 

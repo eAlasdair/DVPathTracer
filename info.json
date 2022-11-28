@@ -2,7 +2,7 @@
   "Id": "DVPathTracer",
   "DisplayName": "DV Path Tracer",
   "Author": "Talkingpeanut",
-  "Version": "0.3.0",
+  "Version": "1.0.0",
   "LoadAfter": [ "DVCustomCarLoader", "Mph" ],
   "AssemblyName": "DVPathTracer.dll",
   "EntryMethod": "DVPathTracer.Main.Load",
