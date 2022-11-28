@@ -24,6 +24,9 @@ namespace DVPathTracer
         [Draw("Save each session to a new file")]
         public bool useSystemTime = true;
 
+        [Draw("Verbose tracing (requires restart)")]
+        public bool verboseTracing = false;
+
         override public void Save(UnityModManager.ModEntry entry)
         {
             Save(this, entry);

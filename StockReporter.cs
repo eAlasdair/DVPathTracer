@@ -9,6 +9,10 @@ namespace DVPathTracer
     public class StockReporter
     {
         public TrainCar Target { get; private set; }
+        public string TargetID { get; private set; }
+        public string TargetType { get; private set; }
+
+        private string prevValues = "";
 
         /**
          * Rolling stock reporter, reports on the given train car (inc. locos, caboose)
@@ -16,6 +20,8 @@ namespace DVPathTracer
         public StockReporter(TrainCar car)
         {
             Target = car;
+            TargetID = car.ID;
+            TargetType = GetCarType(car);
         }
 
         // C = 'Car' (includes locos)
@@ -26,85 +32,38 @@ namespace DVPathTracer
         {
             get
             {
-                string values = $"{ID},{Type},{Position.x},{Position.y - BaseReporter.seaLevel},{Position.z},{Rotation},{SpeedUnits(Speed)},{CarHealth}";
+                string newValues = $"{TargetID},{TargetType},{Position.x},{Position.y - BaseReporter.seaLevel},{Position.z},{Rotation},{SpeedUnits(Speed)},{CarHealth}";
                 if (Target.LoadedCargo == CargoType.None)
                 {
                     if (CargoTypes.Military1CarContainers.Contains(CargoTypes.CarTypeToContainerType[Target.carType]))
                     {
                         // Military 1 licence allows LH jobs of military cars - it's more interesting to class as MIL1 despite being empty
-                        values += ",None,MIL1,N/A";
+                        newValues += ",None,MIL1,N/A";
                     }
                     else
                     {
                         // Loco, caboose, or otherwise unloaded car
-                        values += ",None,N/A,N/A";
+                        newValues += ",None,N/A,N/A";
                     }
                 }
                 else
                 {
-                    values += $",{Cargo},{CargoCategory},{CargoHealth}";
+                    newValues += $",{Cargo},{CargoCategory},{CargoHealth}";
                 }
-                return values;
+                if (Main.verboseTracing || newValues != prevValues)
+                {
+                    prevValues = newValues;
+                    return newValues;
+                }
+                return "";
             }
         }
 
-        /**
-         * In-game ID
-         * L-001 etc
-         */
-        public string ID
+        public string Removed
         {
             get
             {
-                return Target.ID;
-            }
-        }
-
-        /**
-         * Reader-friendly descriptor of the type of car
-         */
-        public string Type
-        {
-            get
-            {
-                string type = "";
-                if (Main.cclEnabled)
-                {
-                    try
-                    {
-                        type = CCLInterface.CustomCarIndentifier(Target.carType);
-                    }
-                    catch //(Exception e)
-                    {
-                        //Main.Log(e.ToString());
-                        // It's either an error or just not CCL stock
-                        // TODO: this better
-                    }
-                }
-                if (type == "")
-                {
-                    switch (Target.carType)
-                    {
-                        case TrainCarType.LocoShunter:
-                            type = "DE2";
-                            break;
-                        case TrainCarType.LocoSteamHeavy:
-                            type = "SH282";
-                            break;
-                        case TrainCarType.LocoDiesel:
-                            type = "DE6";
-                            break;
-                        case TrainCarType.CabooseRed:
-                            type = "Caboose";
-                            break;
-                        case TrainCarType.NotSet:
-                        default:
-                            type = Target.carType.ToString();
-                            break;
-                    }
-                }
-                
-                return type;
+                return $"{TargetID},{TargetType},Removed,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A";
             }
         }
 
@@ -220,6 +179,51 @@ namespace DVPathTracer
                 return speed * (float) 2.23694;
             }
             return speed * (float) 3.6;
+        }
+
+        /**
+         * Returns a reader-friendly descriptor of the type of car
+         */
+        private string GetCarType(TrainCar car)
+        {
+            string type = "";
+            if (Main.cclEnabled)
+            {
+                try
+                {
+                    type = CCLInterface.CustomCarIndentifier(car.carType);
+                }
+                catch //(Exception e)
+                {
+                    //Main.Log(e.ToString());
+                    // It's either an error or just not CCL stock
+                    // TODO: this better
+                }
+            }
+            if (type == "")
+            {
+                switch (car.carType)
+                {
+                    case TrainCarType.LocoShunter:
+                        type = "DE2";
+                        break;
+                    case TrainCarType.LocoSteamHeavy:
+                        type = "SH282";
+                        break;
+                    case TrainCarType.LocoDiesel:
+                        type = "DE6";
+                        break;
+                    case TrainCarType.CabooseRed:
+                        type = "Caboose";
+                        break;
+                    case TrainCarType.NotSet:
+                    default:
+                        type = car.carType.ToString();
+                        break;
+                }
+            }
+
+            return type;
         }
     }
 }
